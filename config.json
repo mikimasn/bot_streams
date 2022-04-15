@@ -1,3 +1,5 @@
 {
-    
+    "timeout":61,
+    "minxp":15,
+    "maxxp":25
 }
