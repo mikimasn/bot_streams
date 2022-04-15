@@ -32,6 +32,25 @@ client.on("interactionCreate",inter=>{
                 inter.editReply({embeds:[embed]})
             })
         }
+        else if(inter.commandName=="leaderboard"){
+            dbc.getleaderboard(5,0,rows=>{
+                var userr = inter.user;
+                var embed = new discord.MessageEmbed()
+                .setColor("RANDOM")
+                .setTitle("leaderboard")
+                .setDescription("leaderboard")
+                .setTimestamp(new Date())
+                .setFooter(userr.tag,userr.avatarURL())
+                for(i=0;i<rows.length;i++){
+                    embed.addFields({name:"username",value:`<@${rows[i]["u_id"]}>`,inline:true},
+                    {name:"xp",value:rows[i]["xp"].toString(),inline:true},
+                    {name:"position",value:i.toString(),inline:true},
+                    { name: '\u200b', value: '\u200b' },
+                )
+                }
+                inter.editReply({embeds:[embed]})
+            })
+        }
     })
     }
     else if(inter.isUserContextMenu()){

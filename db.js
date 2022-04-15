@@ -46,4 +46,12 @@ module.exports=class{
             callback(row===undefined?false:row["xp"])
         })
     }
+    getleaderboard(limit,rowid,callback){
+        this.#db.all(`Select * from data  ORDER by xp DESC LIMIT ?,?`,[rowid,limit],(err,rows)=>{
+            if(err)
+                console.error(err)
+            else
+                callback(rows)
+        })
+    }
 }
