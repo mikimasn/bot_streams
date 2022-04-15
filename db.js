@@ -41,4 +41,9 @@ module.exports=class{
             }
         })
     }
+    readxp(uid,callback){
+        this.#db.get(`Select xp from data where u_id=?`,[uid],(err,row)=>{
+            callback(row===undefined?false:row["xp"])
+        })
+    }
 }

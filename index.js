@@ -18,7 +18,38 @@ client.on("messageCreate",(message)=>{
 })
 client.on("interactionCreate",inter=>{
     if(inter.isCommand()){
-        
+        inter.deferReply({ephemeral:true}).then(()=>{
+        if(inter.commandName=="rank"){
+            var user = inter.options.getUser("user",false)===null?inter.user:inter.options.getUser("user",false);
+            var id = user.id;
+            dbc.readxp(id,xp=>{
+                var embed = new discord.MessageEmbed()
+                .setColor("RANDOM")
+                .setTitle("xp")
+                .setDescription(xp?`${user.username} ma ${xp} xp`:`${user.username} jest nierankingowy`)
+                .setTimestamp(new Date())
+                .setFooter(user.tag,user.avatarURL())
+                inter.editReply({embeds:[embed]})
+            })
+        }
+    })
+    }
+    else if(inter.isUserContextMenu()){
+        inter.deferReply({ephemeral:true}).then(()=>{
+        if(inter.commandName=="rank"){
+            var user = inter.targetUser;
+            var id = user.id;
+            dbc.readxp(id,xp=>{
+                var embed = new discord.MessageEmbed()
+                .setColor("RANDOM")
+                .setTitle("xp")
+                .setDescription(xp?`${user.username} ma ${xp} xp`:`${user.username} jest nierankingowy`)
+                .setTimestamp(new Date())
+                .setFooter(user.tag,user.avatarURL())
+                inter.editReply({embeds:[embed]})
+            })
+        }
+        })
     }
 })
 client.login(secret.token)
