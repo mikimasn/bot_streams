@@ -45,7 +45,7 @@ client.on("interactionCreate",inter=>{
                     embed.addFields({name:"username",value:`<@${rows[i]["u_id"]}>`,inline:true},
                     {name:"xp",value:rows[i]["xp"].toString(),inline:true},
                     {name:"position",value:i.toString(),inline:true},
-                    { name: '\u200b', value: '\u200b' },
+                    { name: '** **', value: '** **' },
                 )
                 }
                 inter.editReply({embeds:[embed]})
